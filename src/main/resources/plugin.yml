@@ -2,7 +2,7 @@ main: com.winthier.freehat.FreeHatPlugin
 name: FreeHat
 version: 0.1
 api-version: 1.13
-description: FreeHat Plugin
+description: Wear items in your helmet slot.
 author: StarTux
 website: https://cavetale.com
 depend: []
