@@ -1,0 +1,3 @@
+# FreeHat
+
+FreeHat plugin.
