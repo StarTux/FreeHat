@@ -1,5 +1,6 @@
 package com.winthier.freehat;
 
+import com.destroystokyo.paper.MaterialTags;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.bukkit.ChatColor;
@@ -21,7 +22,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class FreeHatPlugin extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
-        this.getServer().getPluginManager().registerEvents(this, this);
+        getServer().getPluginManager().registerEvents(this, this);
     }
 
     @Override
@@ -42,11 +43,6 @@ public final class FreeHatPlugin extends JavaPlugin implements Listener {
         ItemStack hand = playerInventory.getItemInHand();
         if (hand == null || hand.getType() == Material.AIR) {
             msg(player, "&cThere's nothing in your hand.");
-            return true;
-        }
-        if (!this.canWear(hand)) {
-            msg(player, "&c%s does not go on your head, silly.",
-                niceItemName(hand));
             return true;
         }
         if (hand.getAmount() > 1) {
@@ -85,8 +81,7 @@ public final class FreeHatPlugin extends JavaPlugin implements Listener {
         if (cursor == null || cursor.getType() == Material.AIR) {
             return;
         }
-        if (isLegitHelmet(cursor)) return;
-        if (!this.canWear(cursor)) return;
+        if (MaterialTags.HEAD_EQUIPPABLE.isTagged(cursor.getType())) return;
         if (cursor.getAmount() > 1) return;
         event.setCancelled(true);
         // Update
@@ -108,48 +103,5 @@ public final class FreeHatPlugin extends JavaPlugin implements Listener {
         return Stream.of(item.getType().name().split("_"))
             .map(s -> s.substring(0, 1) + s.substring(1).toLowerCase())
             .collect(Collectors.joining(" "));
-    }
-
-    static boolean isLegitHelmet(ItemStack item) {
-        switch (item.getType()) {
-        case CHAINMAIL_HELMET:
-        case DIAMOND_HELMET:
-        case GOLDEN_HELMET:
-        case IRON_HELMET:
-        case LEATHER_HELMET:
-        case TURTLE_HELMET:
-        case PLAYER_HEAD:
-        case SKELETON_SKULL:
-        case WITHER_SKELETON_SKULL:
-        case CREEPER_HEAD:
-        case DRAGON_HEAD:
-        case ZOMBIE_HEAD:
-        case PUMPKIN:
-        case CARVED_PUMPKIN:
-        case JACK_O_LANTERN:
-            return true;
-        default:
-            return false;
-        }
-    }
-
-    static boolean canWear(ItemStack item) {
-        Material mat = item.getType();
-        if (mat.isBlock()) return true;
-        switch (mat) {
-        case AIR:
-            return false;
-        case CHAINMAIL_HELMET:
-        case DIAMOND_HELMET:
-        case GOLDEN_HELMET:
-        case IRON_HELMET:
-        case LEATHER_HELMET:
-            return true;
-        default: break;
-        }
-        if (mat.getMaxDurability() > 0) {
-            return false;
-        }
-        return true;
     }
 }
