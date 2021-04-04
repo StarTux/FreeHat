@@ -56,7 +56,7 @@ public final class FreeHatPlugin extends JavaPlugin implements Listener {
         return true;
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     void onInventoryClick(InventoryClickEvent event) {
         if (event.getClick() != ClickType.LEFT) {
             return;
