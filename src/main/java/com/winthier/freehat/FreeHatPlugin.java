@@ -40,7 +40,7 @@ public final class FreeHatPlugin extends JavaPlugin implements Listener {
             msg(player, "&cYou are already wearing a hat.");
             return true;
         }
-        ItemStack hand = playerInventory.getItemInHand();
+        ItemStack hand = playerInventory.getItemInMainHand();
         if (hand == null || hand.getType() == Material.AIR) {
             msg(player, "&cThere's nothing in your hand.");
             return true;
@@ -51,7 +51,7 @@ public final class FreeHatPlugin extends JavaPlugin implements Listener {
             return true;
         }
         playerInventory.setHelmet(hand);
-        playerInventory.setItemInHand(old);
+        playerInventory.setItemInMainHand(old);
         msg(player, "&bEnjoy your fancy %s hat!", niceItemName(hand));
         return true;
     }
