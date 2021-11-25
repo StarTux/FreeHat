@@ -35,16 +35,16 @@
   </build>
   <repositories>
 
-    <!-- Paper Repo -->
-    <repository>
-      <id>papermc</id>
-      <url>https://papermc.io/repo/repository/maven-public/</url>
-    </repository>
-
     <!-- Cavetale Repo -->
     <repository>
       <id>cavetale</id>
       <url>https://cavetale.com/jenkins/plugin/repository/everything/</url>
+    </repository>
+
+    <!-- Paper Repo -->
+    <repository>
+      <id>papermc</id>
+      <url>https://papermc.io/repo/repository/maven-public/</url>
     </repository>
 
   </repositories>
@@ -56,7 +56,6 @@
       <artifactId>paper-api</artifactId>
       <version>1.17.1-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
-      <optional>true</optional>
     </dependency>
 
     <!-- Lombok -->
@@ -64,8 +63,15 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.20</version>
-      <scope>compile</scope>
-      <optional>true</optional>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Mytems -->
+    <dependency>
+      <groupId>com.cavetale.mytems</groupId>
+      <artifactId>mytems</artifactId>
+      <version>0.1-SNAPSHOT</version>
+      <scope>provided</scope>
     </dependency>
 
   </dependencies>
