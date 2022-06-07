@@ -1,9 +1,7 @@
 package com.winthier.freehat;
 
-import com.cavetale.mytems.Mytems;
+import com.cavetale.core.item.ItemKinds;
 import com.destroystokyo.paper.MaterialTags;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
@@ -51,7 +49,7 @@ public final class FreeHatPlugin extends JavaPlugin implements Listener {
         hand.subtract(1);
         playerInventory.setHelmet(helmet);
         player.sendMessage(Component.text("Enjoy your fancy ", NamedTextColor.GREEN)
-                           .append(niceItemName(helmet))
+                           .append(ItemKinds.chatDescription(helmet))
                            .append(Component.text(" hat!")));
         return true;
     }
@@ -89,17 +87,7 @@ public final class FreeHatPlugin extends JavaPlugin implements Listener {
             cursor.subtract(1);
         }
         player.sendActionBar(Component.text("Enjoy your fancy ", NamedTextColor.GREEN)
-                             .append(niceItemName(helmet))
+                             .append(ItemKinds.chatDescription(helmet))
                              .append(Component.text(" hat!")));
-    }
-
-    public static Component niceItemName(ItemStack item) {
-        Mytems mytems = Mytems.forItem(item);
-        if (mytems != null) return mytems.getMytem().getDisplayName();
-        String i18n = item.getI18NDisplayName();
-        if (i18n != null) return Component.text(i18n);
-        return Component.text(Stream.of(item.getType().name().split("_"))
-                              .map(s -> s.substring(0, 1) + s.substring(1).toLowerCase())
-                              .collect(Collectors.joining(" ")));
     }
 }
